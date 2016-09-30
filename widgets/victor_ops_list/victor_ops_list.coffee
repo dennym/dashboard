@@ -18,7 +18,6 @@ class Dashing.VictorOpsList extends Dashing.Widget
     $(@get('node')).css 'background-color', @color()
 
   worstReduce: (memo, curr) ->
-    console.dir(curr)
     if curr['phase'] == 'TRIGGERED'
       'TRIGGERED'
     else if curr['phase'] == 'ACKED' && memo != 'TRIGGERED'
