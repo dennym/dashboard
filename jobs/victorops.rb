@@ -33,7 +33,7 @@ def get_oncall(team)
   on_call
 end
 
-SCHEDULER.every '5m', first_in: 0 do
+SCHEDULER.every '2m', first_in: 0 do
   incidents = get_incidents
     .reject { |incident| incident['currentPhase'] == 'RESOLVED' }
     .map do |incident|
