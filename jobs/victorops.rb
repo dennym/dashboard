@@ -24,8 +24,9 @@ SCHEDULER.every '5m', first_in: 0 do
   incidents = get_incidents.reject do |incident|
     incident['currentPhase'] == 'RESOLVED'
   end.map do |incident|
+    display_name = incident['entityDisplayName'].gsub('&gt;', '>')
     {
-      label: "[#{incident['currentPhase']}] #{incident['entityDisplayName']}",
+      label: "[#{incident['currentPhase'].downcase}] #{display_name}",
       phase: incident['currentPhase']
     }
   end
