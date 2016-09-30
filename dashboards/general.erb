@@ -7,19 +7,18 @@
     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
       <div data-id="serviceDeskIssues" data-view="Number" data-title="Open Service Desk Issues"></div>
     </li>
-    <li data-row="1" data-col="1" data-sizex="2" data-sizey="2">
+    <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
       <div data-id="victorops-incidents" data-view="VictorOpsList" data-unordered="true" data-title="Open VictorOps Incidents"></div>
+    </li>
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-view="DailyXKCD" data-id="xkcd-of-the-day"></div>
+    </li>
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="victorops-oncall" data-view="Text" data-title="Who's on call?"></div>
     </li>
     <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
       <div data-id="twitter_mentions" data-view="Comments" style="background-color:#ff9618;" data-moreinfo="Tweets tagged with <%= ENV['TWITTER_SEARCH'] %>"></div>
       <i class="fa fa-twitter icon-background"></i>
     </li>
-    <!-- <li data&#45;row="1" data&#45;col="1" data&#45;sizex="1" data&#45;sizey="1"> -->
-    <!--   <div data&#45;view="DailyXKCD" data&#45;id="xkcd&#45;of&#45;the&#45;day"></div> -->
-    <!-- </li> -->
-    <!-- <li data&#45;row="1" data&#45;col="1" data&#45;sizex="1" data&#45;sizey="1"> -->
-    <!--   <div data&#45;id="victorops&#45;incidents&#45;count" data&#45;view="Number" data&#45;title="Open VictorOps Incidents"></div> -->
-    <!-- </li> -->
   </ul>
-  <!--<center><div style="font-size: 12px">Try this: curl -d '{ "auth_token": "YOUR_AUTH_TOKEN", "text": "Hey, Look what I can do!" }' \http://<%=request.host%>:<%=request.port%>/widgets/welcome</div></center>-->
 </div>

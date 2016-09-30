@@ -2,7 +2,7 @@ require 'dashing'
 require 'omniauth/azure_activedirectory'
 
 configure do
-  set :auth_token, 'YOUR_AUTH_TOKEN'
+  set :auth_token, ENV['AUTH_TOKEN']
 
   helpers do
     def protected!
@@ -13,11 +13,13 @@ configure do
   end
 
   use Rack::Session::Cookie
+  use OmniAuth::Strategies::Developer if ENV['RACK_ENV'] == 'development'
   use OmniAuth::Builder do
+    provider :developer if ENV['RACK_ENV'] == 'development'
     provider :azure_activedirectory, ENV['AAD_CLIENT_ID'], ENV['AAD_TENANT']
   end
 
-  post '/auth/azureactivedirectory/callback' do
+  post '/auth/:provider/callback' do
     if auth = request.env['omniauth.auth']
       session[:user_id] = auth['info']['email']
       redirect '/'
