@@ -4,22 +4,22 @@ require 'time'
 require 'open-uri'
 require 'cgi'
 
-yamlFile = "./conf/jira_issuecount.yaml"
-if File.exist?(yamlFile)
-  JIRA_OPENISSUES_CONFIG = YAML.load(File.new(yamlFile, "r").read)
+yaml_file = "./conf/jira_issuecount.yaml"
+if File.exist?(yaml_file)
+  JIRA_OPENISSUES_CONFIG = YAML.load(File.new(yaml_file, "r").read)
 else
   JIRA_OPENISSUES_CONFIG = {
     jira_url: ENV['JIRA_URL'],
     username:  ENV['JIRA_USERNAME'],
     password: ENV['JIRA_PASSWORD'],
     issuecount_mapping: {
-      'serviceDeskIssues' => "filter=#{ENV['JIRA_FILTER']}"
+      'service-desk-issues' => "filter=#{ENV['JIRA_FILTER']}"
     }
   }
 end
 
-def getNumberOfIssues(url, username, password, jqlString)
-  jql = CGI.escape(jqlString)
+def get_number_of_issues(url, username, password, jql_string)
+  jql = CGI.escape(jql_string)
   uri = URI.parse("#{url}/rest/api/2/search?jql=#{jql}")
   http = Net::HTTP.new(uri.host, uri.port)
   http.use_ssl = uri.scheme == 'https'
@@ -30,9 +30,9 @@ def getNumberOfIssues(url, username, password, jqlString)
   JSON.parse(http.request(request).body)["total"]
 end
 
-JIRA_OPENISSUES_CONFIG[:issuecount_mapping].each do |mappingName, filter|
+JIRA_OPENISSUES_CONFIG[:issuecount_mapping].each do |mapping_name, filter|
   SCHEDULER.every '5m', :first_in => 0 do
-    total = getNumberOfIssues(JIRA_OPENISSUES_CONFIG[:jira_url], JIRA_OPENISSUES_CONFIG[:username], JIRA_OPENISSUES_CONFIG[:password], filter)
-    send_event(mappingName, {current: total})
+    total = get_number_of_issues(JIRA_OPENISSUES_CONFIG[:jira_url], JIRA_OPENISSUES_CONFIG[:username], JIRA_OPENISSUES_CONFIG[:password], filter)
+    send_event(mapping_name, {value: total})
   end
 end
