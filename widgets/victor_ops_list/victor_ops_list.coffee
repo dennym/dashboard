@@ -5,16 +5,7 @@ class Dashing.VictorOpsList extends Dashing.Widget
     else
       $(@node).find('ul').remove()
 
-  color: ->
-    data = @get('items')
-    # Find out if there's unacked incidents
-    switch data.reduce @worstReduce, null
-      when 'TRIGGERED' then '#ff0000'
-      when 'ACKED' then '#ffcc00'
-      else '#33cc33'
-
   onData: (data) ->
-    console.dir data.items
     switch data.items.reduce @worstReduce, null
       when 'TRIGGERED'
         $(@get('node')).removeClass('acked').addClass('triggered')
