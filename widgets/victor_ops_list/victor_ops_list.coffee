@@ -13,7 +13,7 @@ class Dashing.VictorOpsList extends Dashing.Widget
         $(@get('node')).removeClass('triggered').addClass('acked')
 
   worstReduce: (memo, curr) ->
-    if curr['phase'] == 'TRIGGERED'
+    if curr['phase'] == 'UNACKED'
       'TRIGGERED'
     else if curr['phase'] == 'ACKED' && memo != 'TRIGGERED'
       'ACKED'
