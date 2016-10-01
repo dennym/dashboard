@@ -31,7 +31,7 @@ def get_number_of_issues(url, username, password, jql_string)
 end
 
 JIRA_OPENISSUES_CONFIG[:issuecount_mapping].each do |mapping_name, filter|
-  SCHEDULER.every '5m', :first_in => 0 do
+  SCHEDULER.every '5m', first_in: 0, allow_overlapping: false do
     total = get_number_of_issues(JIRA_OPENISSUES_CONFIG[:jira_url], JIRA_OPENISSUES_CONFIG[:username], JIRA_OPENISSUES_CONFIG[:password], filter)
     send_event(mapping_name, {current: total})
   end

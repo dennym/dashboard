@@ -13,7 +13,7 @@ forecast_location = ENV['FORECAST_LOCATION']
 # "uk" - SI w. windSpeed in mph
 forecast_units = "us"
 
-SCHEDULER.every '5m', :first_in => 0 do |job|
+SCHEDULER.every '5m', first_in: 0, allow_overlapping: false do |job|
   http = Net::HTTP.new("api.forecast.io", 443)
   http.use_ssl = true
   http.verify_mode = OpenSSL::SSL::VERIFY_PEER

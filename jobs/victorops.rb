@@ -47,7 +47,7 @@ def get_oncall(team)
   "#{user['firstName']} #{user['lastName']}"
 end
 
-SCHEDULER.every '2m', first_in: 0 do
+SCHEDULER.every '2m', first_in: 0, allow_overlapping: false do
   incidents = get_incidents
     .reject { |incident| incident['currentPhase'] == 'RESOLVED' }
     .map do |incident|
@@ -62,7 +62,7 @@ SCHEDULER.every '2m', first_in: 0 do
   send_event('victorops-incidents', items: incidents)
 end
 
-SCHEDULER.every '30m', first_in: 0 do
+SCHEDULER.every '30m', first_in: 0, allow_overlapping: false do
   on_call = get_oncall 'support-team'
   send_event 'victorops-oncall', text: on_call
 end
