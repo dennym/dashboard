@@ -4,7 +4,10 @@ require 'open-uri'
 
 VICTOROPS_CONFIG = {
   api_id: ENV['VICTOROPS_ID'],
-  api_key: ENV['VICTOROPS_KEY']
+  api_key: ENV['VICTOROPS_KEY'],
+  org: ENV['VICTOROPS_ORG'],
+  username: ENV['VICTOROPS_USERNAME'],
+  password: ENV['VICTOROPS_PASSWORD']
 }
 
 def get_from_api(path)
@@ -16,6 +19,16 @@ def get_from_api(path)
   request.add_field 'X-VO-Api-Id', VICTOROPS_CONFIG[:api_id]
   request.add_field 'X-VO-Api-Key', VICTOROPS_CONFIG[:api_key]
   JSON.parse(http.request(request).body)
+end
+
+def get_from_private_api(path)
+  uri = URI.parse "https://portal.victorops.com/api/v1/org/#{VICTOROPS_CONFIG[:org]}#{path}"
+  http = Net::HTTP.new uri.host, uri.port
+  http.use_ssl = uri.scheme == 'https'
+  request = Net::HTTP::Get.new uri.to_s
+  request.add_field 'Accept', 'application/json'
+  request.basic_auth VICTOROPS_CONFIG[:username], VICTOROPS_CONFIG[:password]
+  JSON.parse http.request(request).body
 end
 
 def get_incidents
@@ -30,7 +43,8 @@ def get_oncall(team)
       on_call = override['overrideOnCall']
     end
   end
-  on_call
+  user = get_from_private_api "/users/#{on_call}"
+  "#{user['firstName']} #{user['lastName']}"
 end
 
 SCHEDULER.every '2m', first_in: 0 do

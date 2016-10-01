@@ -3,7 +3,7 @@ require 'json'
 
 placeholder = '/assets/images/nyantocat.gif'
 
-SCHEDULER.every '60s', first_in: 0 do |job|
+SCHEDULER.every '1m', first_in: 0 do |job|
   uri = URI.parse 'https://www.reddit.com/r/aww.json'
   http = Net::HTTP.new uri.host, uri.port
   http.use_ssl = uri.scheme == 'https'
