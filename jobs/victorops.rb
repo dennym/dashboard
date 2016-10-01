@@ -53,7 +53,7 @@ SCHEDULER.every '2m', first_in: 0 do
     .map do |incident|
       display_name = incident['entityDisplayName'].gsub('&gt;', '>')
       {
-        label: "[#{incident['currentPhase'].downcase}] #{display_name}",
+        label: "#{display_name}",
         phase: incident['currentPhase']
       }
     end
