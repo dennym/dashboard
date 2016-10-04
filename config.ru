@@ -8,7 +8,8 @@ configure do
     def protected!
       # Put any authentication code you want in here.
       # This method is run before accessing any resource.
-      redirect '/auth/azureactivedirectory' unless session[:user_id]
+      default_auth = ENV['RACK_ENV'] == 'development' ? 'developer' : 'azureactivedirectory'
+      redirect "/auth/#{default_auth}" unless session[:user_id]
     end
   end
 
