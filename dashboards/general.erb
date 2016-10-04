@@ -1,4 +1,11 @@
 <% content_for :title do %>General Dashboard<% end %>
+<script type='text/javascript'>
+$(function() {
+  // These settings override the defaults set in application.coffee. You can do this on a per dashboard basis.
+  Dashing.widget_base_dimensions = [370, 340]
+  Dashing.numColumns = 5
+});
+</script>
 <div class="gridster">
   <ul>
     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
@@ -7,14 +14,14 @@
     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
       <div data-id="service-desk-issues" data-view="Number" data-title="Open Service Desk Issues"></div>
     </li>
-    <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="victorops-oncall" data-view="Text" data-title="Who's on call?"></div>
+    </li>
+    <li data-row="1" data-col="1" data-sizex="2" data-sizey="2">
       <div data-id="victorops-incidents" data-view="VictorOpsList" data-unordered="true" data-title="Open Incidents" data-moreinfo="Powered by VictorOps"></div>
     </li>
     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
       <div data-id="aww" data-view="RandomAww"></div>
-    </li>
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="victorops-oncall" data-view="Text" data-title="Who's on call?"></div>
     </li>
     <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
       <div data-id="twitter_mentions" data-view="Comments" style="background-color:#4099FF;" data-moreinfo="Tweets tagged with <%= ENV['TWITTER_SEARCH'] %>"></div>
