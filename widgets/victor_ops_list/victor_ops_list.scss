@@ -23,7 +23,7 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
     background-color: #ff0000;
     animation: pulse 1s 10;
   }
-  &.acked { background-color: #ffcc00; }
+  &.acked { background-color: rgba(248, 174, 86, 1.0); }
 
   .title {
     color: $title-color;
@@ -49,14 +49,17 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
 
   .label {
     color: $label-color;
+    margin-left: 10px;
   }
 
   .value {
-    float: right;
-    margin-left: 12px;
+    // float: right;
+    // margin-left: 12px;
     font-weight: 600;
     color: $value-color;
   }
+  .value::before { content: '['; }
+  .value::after { content: ']'; }
 
   .updated-at {
     color: rgba(0, 0, 0, 0.3);
