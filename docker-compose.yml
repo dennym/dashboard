@@ -4,6 +4,7 @@ services:
     build: .
     environment:
       RACK_ENV: development
+      COOKIE_SECRET: foobar
       AUTH_TOKEN: foobar
       AAD_CLIENT_ID: ${AAD_CLIENT_ID}
       AAD_TENANT: ${AAD_TENANT}

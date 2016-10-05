@@ -3,13 +3,14 @@ require 'json'
 
 placeholder = '/assets/images/nyantocat.gif'
 
-SCHEDULER.every '1m', first_in: 0, allow_overlapping: false do |job|
+SCHEDULER.every '3m', first_in: 0, allow_overlapping: false do |job|
   begin
     uri = URI.parse 'https://www.reddit.com/r/aww.json'
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = uri.scheme == 'https'
     request =  Net::HTTP::Get.new uri.to_s
     request.add_field 'Accept', 'application/json'
+    request.add_field 'User-Agent', 'Dashing Dashboard'
     response = http.request(request)
     if response.code != '200'
       raise StandardError, "Received non-200 status code (#{response.code}) from Reddit API"
