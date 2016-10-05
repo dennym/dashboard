@@ -13,7 +13,7 @@ configure do
     end
   end
 
-  use Rack::Session::Cookie
+  use Rack::Session::Cookie, secret: ENV.fetch('COOKIE_SECRET') { 'g7kmeV9hxAFkkIXY' }
   use OmniAuth::Strategies::Developer if ENV['RACK_ENV'] == 'development'
   use OmniAuth::Builder do
     provider :developer if ENV['RACK_ENV'] == 'development'
