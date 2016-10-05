@@ -12,7 +12,7 @@ SCHEDULER.every '1m', first_in: 0, allow_overlapping: false do |job|
     request.add_field 'Accept', 'application/json'
     response = http.request(request)
     if response.code != '200'
-      raise StandardError, 'Received non-200 status code from API'
+      raise StandardError, "Received non-200 status code (#{response.code}) from Reddit API"
     end
     json = JSON.parse(response.body)
     # require 'pry'
@@ -27,7 +27,7 @@ SCHEDULER.every '1m', first_in: 0, allow_overlapping: false do |job|
       valid_urls = urls.select{|url| url.downcase.end_with?('png', 'gif', 'jpg', 'jpeg')}
       send_event('aww', image: "background-image:url(#{valid_urls.sample(1).first})")
     end
-  rescue StandardError
-    puts "\e[33mError connecting to Reddit.\e[0m"
+  rescue StandardError => err
+    puts "\e[33m#{err.message}\e[0m"
   end
 end
