@@ -6,6 +6,10 @@ class Dashing.VictorOpsList extends Dashing.Widget
       $(@node).find('ul').remove()
 
   onData: (data) ->
+    if data.items.length
+      $(@node).find('.no-items').hide();
+    else
+      $(@node).find('.no-items').show();
     switch data.items.reduce @worstReduce, null
       when 'TRIGGERED'
         $(@get('node')).removeClass('acked').addClass('triggered')
@@ -19,4 +23,3 @@ class Dashing.VictorOpsList extends Dashing.Widget
       'ACKED'
     else
       null
-
