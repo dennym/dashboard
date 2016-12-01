@@ -1,0 +1,2 @@
+defmodule Dashboard do
+end

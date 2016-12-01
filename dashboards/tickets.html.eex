@@ -1,0 +1,9 @@
+<div class="gridster">
+  <ul>
+    <li data-row="1" data-col="1" data-sizex="2" data-sizey="2">
+      <div data-source="service_desk_issues_list"
+           data-widget="JiraTable"
+           data-title="Service Desk Issues"></div>
+    </li>
+  </ul>
+</div>
