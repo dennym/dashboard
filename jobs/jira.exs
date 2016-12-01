@@ -1,6 +1,6 @@
 use Kitto.Job.DSL
 
-@filters = [
+filters = [
   "service_desk_issues": "10300",
   "unassigned_issues": "10100"
 ]

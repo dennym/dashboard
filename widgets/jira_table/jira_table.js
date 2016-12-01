@@ -9,8 +9,8 @@ class TableRow extends React.Component {
     return (
       <tr>
         <td><img className="priority-icon" src={this.props.priorityIcon} alt={this.props.priority} /></td>
-        <td className="issue-key">{this.props.id}</td>
         <td className="issue-summary">{truncate(this.props.summary, this.props.summaryLength || 80)}</td>
+        <td className="issue-key">{this.props.id}</td>
       </tr>
     )
   }
@@ -37,8 +37,8 @@ export class JiraTable extends Widget {
           <thead>
             <tr>
               <th>&nbsp;</th>
-              <th>Key</th>
               <th>Summary</th>
+              <th>Key</th>
             </tr>
           </thead>
           <tbody>{this.renderRows(this.state.items || [])}</tbody>

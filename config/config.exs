@@ -35,4 +35,8 @@ config :dashboard,
   jira: %{
     auth: System.get_env("JIRA_AUTH"), # `echo -n "username:password" | base64`
     url: System.get_env("JIRA_URL")
+  },
+  forecast_io: %{
+    api_key: System.get_env("FORECAST_API_KEY"),
+    location: System.get_env("FORECAST_LOCATION")
   }

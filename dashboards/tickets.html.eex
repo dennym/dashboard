@@ -1,6 +1,16 @@
 <div class="gridster">
   <ul>
-    <li data-row="1" data-col="1" data-sizex="2" data-sizey="2">
+    <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
+      <div data-source="service_desk_issues_count"
+           data-widget="Number"
+           data-title="Open Service Desk Issues"></div>
+    </li>
+    <li data-row="2" data-col="1" data-sizex="2" data-sizey="1">
+      <div data-source="unassigned_issues_list"
+           data-widget="JiraTable"
+           data-title="Unassigned Issues"></div>
+    </li>
+    <li data-row="1" data-col="3" data-sizex="2" data-sizey="2">
       <div data-source="service_desk_issues_list"
            data-widget="JiraTable"
            data-title="Service Desk Issues"></div>
